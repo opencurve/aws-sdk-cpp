@@ -27,7 +27,8 @@ namespace Aws
                 partSize(5 * 1024 * 1024),
                 scheme(Aws::Http::Scheme::HTTPS),
                 throughputTargetGbps(2.0),
-                shutdownCallbackUserData(nullptr)
+                shutdownCallbackUserData(nullptr),
+                maxActiveConnectionsOverride(0)
             {};
 
             /* Region that the S3 bucket lives in. */
@@ -76,6 +77,9 @@ namespace Aws
             /* Callback and associated user data for when the client has completed its shutdown process. */
             std::function<void(void*)> clientShutdownCallback;
             void *shutdownCallbackUserData;
+
+            /* Override max active connection number */
+            size_t maxActiveConnectionsOverride;
 
             operator Aws::Client::ClientConfiguration() const
             {

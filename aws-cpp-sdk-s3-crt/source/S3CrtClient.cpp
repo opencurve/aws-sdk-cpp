@@ -250,6 +250,7 @@ void S3CrtClient::init(const S3Crt::ClientConfiguration& config, const Aws::Auth
   m_wrappedData.clientShutdownSem = m_clientShutdownSem;
   s3CrtConfig.shutdown_callback = CrtClientShutdownCallback;
   s3CrtConfig.shutdown_callback_user_data = static_cast<void*>(&m_wrappedData);
+  s3CrtConfig.max_active_connections_override = config.maxActiveConnectionsOverride;
 
   m_s3CrtClient = aws_s3_client_new(Aws::get_aws_allocator(), &s3CrtConfig);
   if (tlsConnectionOptions)
