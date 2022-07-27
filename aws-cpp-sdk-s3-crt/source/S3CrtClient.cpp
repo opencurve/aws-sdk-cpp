@@ -206,7 +206,7 @@ void S3CrtClient::init(const S3Crt::ClientConfiguration& config, const Aws::Auth
   s3CrtConfig.client_bootstrap = clientBootstrap->GetUnderlyingHandle();
 
   std::shared_ptr<Aws::Crt::Auth::ICredentialsProvider> provider(nullptr);
-  if (credentials)
+  if (credentials && !(credentials->GetAWSAccessKeyId() == "" && credentials->GetAWSSecretKey() == ""))
   {
     Aws::Crt::Auth::CredentialsProviderStaticConfig staticCreds;
     staticCreds.AccessKeyId = Aws::Crt::ByteCursorFromCString(credentials->GetAWSAccessKeyId().c_str());
