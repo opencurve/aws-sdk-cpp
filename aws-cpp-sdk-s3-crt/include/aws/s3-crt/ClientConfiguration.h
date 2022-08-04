@@ -81,6 +81,9 @@ namespace Aws
             /* Override max active connection number */
             size_t maxActiveConnectionsOverride;
 
+            /* User Agent */
+            Aws::String userAgent;
+
             operator Aws::Client::ClientConfiguration() const
             {
                 Aws::Client::ClientConfiguration config;
@@ -91,6 +94,7 @@ namespace Aws
                 config.executor = executor;
                 config.enableHostPrefixInjection = enableHostPrefixInjection;
                 config.scheme = scheme;
+                config.userAgent = userAgent;
                 return config;
             }
         };
